@@ -1,3 +1,16 @@
-from django.contrib import admin # noqa
+"""django admin customization"""
+from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+# from django.contrib.auth.models import User
 
-# Register your models here.
+from core import models
+
+
+class UserAdmin(BaseUserAdmin):
+    """Define admin page for user"""
+
+    ordering = ['id']
+    list_display = ['email', 'name']
+
+
+admin.site.register(models.User, UserAdmin)
